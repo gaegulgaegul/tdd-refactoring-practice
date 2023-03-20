@@ -14,11 +14,11 @@ public class DebtStatus {
     }
 
     private int calculateOutstanding(Invoice invoice) {
-        int outstanding = 0;
+        int result = 0;
         for (Order o : invoice.getOrders()) {
-            outstanding += o.getAmount();
+            result += o.getAmount();
         }
-        return outstanding;
+        return result;
     }
 
     private void recordDueDate(Invoice invoice) {
