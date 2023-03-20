@@ -16,10 +16,14 @@ public class DebtStatus {
         LocalDate today = Clock.getToday();
         invoice.setDueDate(today.plusDays(30L));
 
-        result += "고객명: " + invoice.getCustomer() + "\n"
+        result += printDetails(invoice, outstanding);
+        return result;
+    }
+
+    private String printDetails(Invoice invoice, int outstanding) {
+        return "고객명: " + invoice.getCustomer() + "\n"
                 + "채무액: " + outstanding + "\n"
                 + "마감일: " + invoice.getDueDate().format(DateTimeFormatter.ISO_DATE);
-        return result;
     }
 
     private String printBanner() {
