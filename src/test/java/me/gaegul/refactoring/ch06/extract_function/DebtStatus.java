@@ -13,11 +13,15 @@ public class DebtStatus {
             outstanding += o.getAmount();
         }
 
-        LocalDate today = Clock.getToday();
-        invoice.setDueDate(today.plusDays(30L));
+        recordDueDate(invoice);
 
         result += printDetails(invoice, outstanding);
         return result;
+    }
+
+    private void recordDueDate(Invoice invoice) {
+        LocalDate today = Clock.getToday();
+        invoice.setDueDate(today.plusDays(30L));
     }
 
     private String printDetails(Invoice invoice, int outstanding) {
