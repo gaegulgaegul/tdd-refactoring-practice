@@ -5,18 +5,23 @@ import java.time.format.DateTimeFormatter;
 
 public class DebtStatus {
     public String getOwing(Invoice invoice) {
-        int outstanding = 0;
 
         String result = printBanner();
 
-        for (Order o : invoice.getOrders()) {
-            outstanding += o.getAmount();
-        }
+        int outstanding = calculateOutstanding(invoice);
 
         recordDueDate(invoice);
 
         result += printDetails(invoice, outstanding);
         return result;
+    }
+
+    private int calculateOutstanding(Invoice invoice) {
+        int outstanding = 0;
+        for (Order o : invoice.getOrders()) {
+            outstanding += o.getAmount();
+        }
+        return outstanding;
     }
 
     private void recordDueDate(Invoice invoice) {
