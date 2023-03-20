@@ -7,9 +7,7 @@ public class DebtStatus {
     public String getOwing(Invoice invoice) {
         int outstanding = 0;
 
-        String result = "**********************\n"
-                + "****   고객 채무   ****\n"
-                + "**********************\n";
+        String result = printBanner();
 
         for (Order o : invoice.getOrders()) {
             outstanding += o.getAmount();
@@ -22,5 +20,11 @@ public class DebtStatus {
                 + "채무액: " + outstanding + "\n"
                 + "마감일: " + invoice.getDueDate().format(DateTimeFormatter.ISO_DATE);
         return result;
+    }
+
+    private String printBanner() {
+        return "**********************\n"
+                + "****   고객 채무   ****\n"
+                + "**********************\n";
     }
 }
