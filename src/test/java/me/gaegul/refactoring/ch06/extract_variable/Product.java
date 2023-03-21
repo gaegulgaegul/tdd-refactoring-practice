@@ -5,6 +5,6 @@ public class Product {
         int basePrice = order.getQuantity() * order.getItemPrice();
         return basePrice
                 - Math.max(0, order.getQuantity() - 500) * order.getItemPrice() * 0.05
-                + Math.min(order.getQuantity() * order.getItemPrice() * 0.1, 100);
+                + Math.min(basePrice * 0.1, 100);
     }
 }
