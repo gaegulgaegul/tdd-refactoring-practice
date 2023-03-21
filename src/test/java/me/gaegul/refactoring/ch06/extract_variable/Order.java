@@ -28,4 +28,8 @@ public class Order {
     double getShipping() {
         return Math.min(getBasePrice() * 0.1, 100);
     }
+
+    public double price() {
+        return getBasePrice() - getQuantityDiscount() + getShipping();
+    }
 }

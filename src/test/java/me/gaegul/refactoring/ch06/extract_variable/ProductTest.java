@@ -13,7 +13,7 @@ public class ProductTest {
     void price() {
         Product product = new Product();
         Order order = new Order(5, 1000);
-        double result = product.price(order);
+        double result = order.price();
         assertThat(result).isEqualTo(5100.0);
     }
 }
