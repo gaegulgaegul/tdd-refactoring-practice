@@ -14,6 +14,6 @@ public class ProductTest {
         Product product = new Product();
         Order order = new Order(5, 1000);
         double result = product.price(order);
-        assertThat(result).isEqualTo(0);
+        assertThat(result).isEqualTo(5100.0);
     }
 }
