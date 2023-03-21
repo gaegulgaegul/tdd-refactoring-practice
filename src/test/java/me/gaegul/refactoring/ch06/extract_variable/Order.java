@@ -16,4 +16,16 @@ public class Order {
     public int getItemPrice() {
         return itemPrice;
     }
+
+    int getBasePrice() {
+        return getQuantity() * getItemPrice();
+    }
+
+    double getQuantityDiscount() {
+        return Math.max(0, getQuantity() - 500) * getItemPrice() * 0.05;
+    }
+
+    double getShipping() {
+        return Math.min(getBasePrice() * 0.1, 100);
+    }
 }
