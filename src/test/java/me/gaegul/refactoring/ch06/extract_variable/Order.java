@@ -9,20 +9,12 @@ public class Order {
         this.itemPrice = itemPrice;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public int getItemPrice() {
-        return itemPrice;
-    }
-
     int getBasePrice() {
-        return getQuantity() * getItemPrice();
+        return quantity * itemPrice;
     }
 
     double getQuantityDiscount() {
-        return Math.max(0, getQuantity() - 500) * getItemPrice() * 0.05;
+        return Math.max(0, quantity - 500) * itemPrice * 0.05;
     }
 
     double getShipping() {
