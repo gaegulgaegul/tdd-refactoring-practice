@@ -64,4 +64,20 @@ public class PasswordMatcherTest {
         PasswordStrength result = matcher.match("1235");
         assertThat(result).isEqualTo(PasswordStrength.WEAK);
     }
+
+    @DisplayName("패스워드는 대문자만 포함하면 약함을 반환한다.")
+    @Test
+    void match_text() {
+        PasswordMatcher matcher = new PasswordMatcher();
+        PasswordStrength result = matcher.match("dfnjSA");
+        assertThat(result).isEqualTo(PasswordStrength.WEAK);
+    }
+
+    @DisplayName("패스워드는 길이만 8글자 이상이면 약함을 반환한다.")
+    @Test
+    void match_length() {
+        PasswordMatcher matcher = new PasswordMatcher();
+        PasswordStrength result = matcher.match("dfnjSA");
+        assertThat(result).isEqualTo(PasswordStrength.WEAK);
+    }
 }
