@@ -10,13 +10,17 @@ public class PasswordMatcher {
         Pattern number = Pattern.compile("[0-9]");
         Pattern upperText = Pattern.compile("[A-Z]");
 
-        if (password.length() >= 8 && number.matcher(password).find()) {
+        boolean isGreaterThen = password.length() >= 8;
+        boolean hasNumber = number.matcher(password).find();
+        boolean hasUpperText = upperText.matcher(password).find();
+
+        if (isGreaterThen && hasNumber) {
             return PasswordStrength.NORMAL;
         }
-        if (number.matcher(password).find() && upperText.matcher(password).find()) {
+        if (hasNumber && hasUpperText) {
             return PasswordStrength.NORMAL;
         }
-        if (password.length() >= 8 && upperText.matcher(password).find()) {
+        if (isGreaterThen && hasUpperText) {
             return PasswordStrength.NORMAL;
         }
 
