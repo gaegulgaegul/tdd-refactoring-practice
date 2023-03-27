@@ -1,7 +1,7 @@
 package me.gaegul.tdd;
 
 public class PasswordMatcher {
-    public void match(String password) {
+    public PasswordStrength match(String password) {
         throw new IllegalArgumentException();
     }
 }
