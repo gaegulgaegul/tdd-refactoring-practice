@@ -15,4 +15,12 @@ public class PasswordMatcherTest {
         assertThatThrownBy(() -> matcher.match(null))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("빈 값이면 예외발생")
+    @Test
+    void empty_check() {
+        PasswordMatcher matcher = new PasswordMatcher();
+        assertThatThrownBy(() -> matcher.match(""))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
