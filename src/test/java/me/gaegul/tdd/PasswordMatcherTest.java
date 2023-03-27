@@ -49,4 +49,11 @@ public class PasswordMatcherTest {
         assertThat(result).isEqualTo(PasswordStrength.NORMAL);
     }
 
+    @DisplayName("패스워드는 길이가 8글자 이상이고 대문자를 포함하면 보통을 반환한다.")
+    @Test
+    void without_number() {
+        PasswordMatcher matcher = new PasswordMatcher();
+        PasswordStrength result = matcher.match("asdwfcvsA");
+        assertThat(result).isEqualTo(PasswordStrength.NORMAL);
+    }
 }
