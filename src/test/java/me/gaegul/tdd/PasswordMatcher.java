@@ -14,13 +14,13 @@ public class PasswordMatcher {
         boolean hasNumber = number.matcher(password).find();
         boolean hasUpperText = upperText.matcher(password).find();
 
-        if (isGreaterThen && hasNumber) {
+        if (!hasUpperText) {
             return PasswordStrength.NORMAL;
         }
-        if (hasNumber && hasUpperText) {
+        if (!isGreaterThen) {
             return PasswordStrength.NORMAL;
         }
-        if (isGreaterThen && hasUpperText) {
+        if (!hasNumber) {
             return PasswordStrength.NORMAL;
         }
 
