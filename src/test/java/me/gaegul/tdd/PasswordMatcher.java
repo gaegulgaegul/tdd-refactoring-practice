@@ -18,14 +18,7 @@ public class PasswordMatcher {
         if (isGreaterThen(password)) count++;
         if (hasNumber(password)) count++;
 
-        switch (count) {
-            case 3:
-                return PasswordStrength.STRONG;
-            case 2:
-                return PasswordStrength.NORMAL;
-            default:
-                return PasswordStrength.WEAK;
-        }
+        return PasswordStrength.of(count);
     }
 
     private static boolean isEmpty(String password) {
