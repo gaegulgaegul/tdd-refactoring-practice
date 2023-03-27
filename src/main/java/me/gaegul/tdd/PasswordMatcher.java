@@ -21,7 +21,7 @@ public class PasswordMatcher {
         return PasswordStrength.of(count);
     }
 
-    private static boolean isEmpty(String password) {
+    private boolean isEmpty(String password) {
         return password == null || "".equals(password);
     }
 
