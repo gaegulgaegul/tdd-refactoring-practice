@@ -16,6 +16,9 @@ public class PasswordMatcher {
         if (number.matcher(password).find() && upperText.matcher(password).find()) {
             return PasswordStrength.NORMAL;
         }
+        if (password.length() >= 8 && upperText.matcher(password).find()) {
+            return PasswordStrength.NORMAL;
+        }
 
         return PasswordStrength.STRONG;
     }
