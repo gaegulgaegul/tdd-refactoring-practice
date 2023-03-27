@@ -48,4 +48,5 @@ public class PasswordMatcherTest {
         PasswordStrength result = matcher.match("123456A");
         assertThat(result).isEqualTo(PasswordStrength.NORMAL);
     }
+
 }
