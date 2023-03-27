@@ -3,21 +3,20 @@ package me.gaegul.tdd;
 import java.util.regex.Pattern;
 
 public class PasswordMatcher {
+
+    public static final Pattern NUMBER_PATTERN = Pattern.compile("[0-9]");
+    public static final Pattern UPPER_TEXT_PATTERN = Pattern.compile("[A-Z]");
+    public static final int MIN_LENGTH = 8;
+
     public PasswordStrength match(String password) {
-        if (password == null || "".equals(password)) {
+        if (isEmpty(password)) {
             throw new IllegalArgumentException();
         }
-        Pattern number = Pattern.compile("[0-9]");
-        Pattern upperText = Pattern.compile("[A-Z]");
 
         int count = 0;
-        boolean isGreaterThen = password.length() >= 8;
-        boolean hasNumber = number.matcher(password).find();
-        boolean hasUpperText = upperText.matcher(password).find();
-
-        if (hasUpperText) count++;
-        if (isGreaterThen) count++;
-        if (hasNumber) count++;
+        if (hasUpperText(password)) count++;
+        if (isGreaterThen(password)) count++;
+        if (hasNumber(password)) count++;
 
         switch (count) {
             case 3:
@@ -27,5 +26,21 @@ public class PasswordMatcher {
             default:
                 return PasswordStrength.WEAK;
         }
+    }
+
+    private static boolean isEmpty(String password) {
+        return password == null || "".equals(password);
+    }
+
+    private boolean isGreaterThen(String password) {
+        return password.length() >= MIN_LENGTH;
+    }
+
+    private boolean hasNumber(String password) {
+        return NUMBER_PATTERN.matcher(password).find();
+    }
+
+    private boolean hasUpperText(String password) {
+        return UPPER_TEXT_PATTERN.matcher(password).find();
     }
 }
