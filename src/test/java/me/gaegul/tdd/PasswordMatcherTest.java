@@ -32,4 +32,12 @@ public class PasswordMatcherTest {
         PasswordStrength result = matcher.match("123456Ab");
         assertThat(result).isEqualTo(PasswordStrength.STRONG);
     }
+
+    @DisplayName("패스워드는 길이가 8글자 이상이고 0~9숫자를 포함하면 보통을 반환한다.")
+    @Test
+    void without_text() {
+        PasswordMatcher matcher = new PasswordMatcher();
+        PasswordStrength result = matcher.match("12345600");
+        assertThat(result).isEqualTo(PasswordStrength.NORMAL);
+    }
 }

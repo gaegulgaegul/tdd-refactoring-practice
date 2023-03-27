@@ -1,5 +1,5 @@
 package me.gaegul.tdd;
 
 public enum PasswordStrength {
-    STRONG
+    NORMAL, STRONG
 }
