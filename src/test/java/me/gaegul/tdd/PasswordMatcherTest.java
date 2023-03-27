@@ -56,4 +56,12 @@ public class PasswordMatcherTest {
         PasswordStrength result = matcher.match("asdwfcvsA");
         assertThat(result).isEqualTo(PasswordStrength.NORMAL);
     }
+
+    @DisplayName("패스워드는 0~9숫자만 포함하면 약함을 반환한다.")
+    @Test
+    void match_number() {
+        PasswordMatcher matcher = new PasswordMatcher();
+        PasswordStrength result = matcher.match("1235");
+        assertThat(result).isEqualTo(PasswordStrength.WEAK);
+    }
 }
