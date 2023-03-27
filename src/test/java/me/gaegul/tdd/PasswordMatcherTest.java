@@ -40,4 +40,12 @@ public class PasswordMatcherTest {
         PasswordStrength result = matcher.match("12345600");
         assertThat(result).isEqualTo(PasswordStrength.NORMAL);
     }
+
+    @DisplayName("패스워드는 0~9숫자를 포함하고 대문자를 포함하면 보통을 반환한다.")
+    @Test
+    void without_length() {
+        PasswordMatcher matcher = new PasswordMatcher();
+        PasswordStrength result = matcher.match("123456A");
+        assertThat(result).isEqualTo(PasswordStrength.NORMAL);
+    }
 }
