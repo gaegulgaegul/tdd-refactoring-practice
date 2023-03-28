@@ -80,4 +80,12 @@ public class PasswordMatcherTest {
         PasswordStrength result = matcher.match("dsjfwdsw");
         assertThat(result).isEqualTo(PasswordStrength.WEAK);
     }
+
+    @DisplayName("모든 조건을 만족하지 않으면 예외가 발생한다.")
+    @Test
+    void all_not_match() {
+        PasswordMatcher matcher = new PasswordMatcher();
+        assertThatThrownBy(() -> matcher.match("dsj"))
+                .isInstanceOf(NotMatchPasswordException.class);
+    }
 }
