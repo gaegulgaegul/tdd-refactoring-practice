@@ -77,7 +77,7 @@ public class PasswordMatcherTest {
     @Test
     void match_length() {
         PasswordMatcher matcher = new PasswordMatcher();
-        PasswordStrength result = matcher.match("dfnjSA");
+        PasswordStrength result = matcher.match("dsjfwdsw");
         assertThat(result).isEqualTo(PasswordStrength.WEAK);
     }
 }
