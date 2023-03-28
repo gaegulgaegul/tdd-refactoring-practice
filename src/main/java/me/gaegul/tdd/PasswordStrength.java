@@ -9,8 +9,10 @@ public enum PasswordStrength {
                 return STRONG;
             case 2:
                 return NORMAL;
-            default:
+            case 1:
                 return WEAK;
+            default:
+                throw new NotMatchPasswordException();
         }
     }
 }
