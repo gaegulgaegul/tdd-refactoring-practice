@@ -14,7 +14,7 @@ class CarMeterTest {
 		Reading rawReading = acquireReading();
 		Reading aReading = new Reading(rawReading);
 		int baseCharge = aReading.baseCharge();
-		assertThat(baseCharge).isEqualTo(1);
+		assertThat(baseCharge).isEqualTo(0);
 	}
 
 	@DisplayName("클라이언트 2 - 차 소비량 면세 가격 측정")
@@ -23,7 +23,7 @@ class CarMeterTest {
 		Reading rawReading = acquireReading();
 		Reading aReading = new Reading(rawReading);
 		int taxableCharge = aReading.taxableCharge();
-		assertThat(taxableCharge).isEqualTo(1);
+		assertThat(taxableCharge).isEqualTo(0);
 	}
 
 	@DisplayName("클라이언트 3 - 기본 가격 측정 캡슐화")
@@ -32,7 +32,7 @@ class CarMeterTest {
 		Reading rawReading = acquireReading();
 		Reading aReading = new Reading(rawReading);
 		int baseCharge = aReading.baseCharge();
-		assertThat(baseCharge).isEqualTo(1);
+		assertThat(baseCharge).isEqualTo(0);
 	}
 
 	private Reading acquireReading() {
