@@ -33,7 +33,15 @@ public class Reading {
 		return baseRate(month(), year()) * quantity();
 	}
 
-	public int baseRate(int month, int year) {
+	public int taxableCharge(Reading aReading) {
+		return Math.max(0, aReading.baseCharge() - taxThreshold(aReading.year()));
+	}
+
+	private int taxThreshold(int year) {
+		return 0;
+	}
+
+	private int baseRate(int month, int year) {
 		return 0;
 	}
 }
