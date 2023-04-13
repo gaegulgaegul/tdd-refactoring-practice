@@ -28,7 +28,8 @@ class CarMeterTest {
 	@DisplayName("클라이언트 3 - 기본 가격 측정 캡슐화")
 	@Test
 	void client3() {
-		Reading aReading = acquireReading();
+		Reading rawReading = acquireReading();
+		Reading aReading = enrichReading(rawReading);
 		int basicChargeAmount = calculateBaseCharge(aReading);
 		assertThat(basicChargeAmount).isEqualTo(0);
 	}
@@ -51,6 +52,7 @@ class CarMeterTest {
 
 	private Reading enrichReading(Reading original) {
 		Reading result = original.clone();
+		result.setBaseCharge(calculateBaseCharge(result));
 		return result;
 	}
 }
