@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Thermometer {
-	public List<Reading> readingOutsideRange(Station station, int min, int max) {
+	public List<Reading> readingOutsideRange(Station station, NumberRange numberRange) {
 		return station.getReadings().stream()
-			.filter(r -> r.getTemp() < min || r.getTemp() > max)
+			.filter(r -> numberRange.contains(r.getTemp()))
 			.collect(Collectors.toList());
 	}
+
 }

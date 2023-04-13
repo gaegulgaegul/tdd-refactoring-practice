@@ -25,7 +25,8 @@ class ThermometerTest {
 	@Test
 	void readingOutsideRange() {
 		final Thermometer thermometer = new Thermometer();
-		final List<Reading> results = thermometer.readingOutsideRange(STATION, 45, 57);
+		final NumberRange numberRange = new NumberRange(45, 57);
+		final List<Reading> results = thermometer.readingOutsideRange(STATION, numberRange);
 		assertThat(results).singleElement();
 	}
 

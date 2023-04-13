@@ -1,8 +1,8 @@
 package me.gaegul.refactoring.ch06.introduce_parameter_object;
 
 public class Reading {
-	private int temp;
-	private String time;
+	private final int temp;
+	private final String time;
 
 	public Reading(final int temp, final String time) {
 		this.temp = temp;
