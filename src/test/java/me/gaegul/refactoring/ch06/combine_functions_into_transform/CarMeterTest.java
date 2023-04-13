@@ -30,8 +30,8 @@ class CarMeterTest {
 	void client3() {
 		Reading rawReading = acquireReading();
 		Reading aReading = enrichReading(rawReading);
-		int basicChargeAmount = calculateBaseCharge(aReading);
-		assertThat(basicChargeAmount).isEqualTo(0);
+		int baseCharge = aReading.getBaseCharge();
+		assertThat(baseCharge).isEqualTo(0);
 	}
 
 	private int calculateBaseCharge(Reading aReading) {
