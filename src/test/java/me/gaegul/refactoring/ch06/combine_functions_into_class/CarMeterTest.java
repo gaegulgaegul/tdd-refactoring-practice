@@ -21,7 +21,7 @@ class CarMeterTest {
 	@Test
 	void client2() {
 		Reading aReading = acquireReading();
-		int taxableCharge = aReading.taxableCharge(aReading);
+		int taxableCharge = aReading.taxableCharge();
 		assertThat(taxableCharge).isEqualTo(1);
 	}
 
