@@ -46,6 +46,11 @@ class CarMeterTest {
 	}
 
 	private Reading acquireReading() {
-		return null;
+		return new Reading("ivan", 10, 5, 2017);
+	}
+
+	private Reading enrichReading(Reading original) {
+		Reading result = original.clone();
+		return result;
 	}
 }

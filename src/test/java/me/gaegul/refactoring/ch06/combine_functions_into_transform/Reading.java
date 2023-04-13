@@ -1,6 +1,6 @@
 package me.gaegul.refactoring.ch06.combine_functions_into_transform;
 
-public class Reading {
+public class Reading implements Cloneable {
 	private final String customer;
 	private final int quantity;
 	private final int month;
@@ -11,6 +11,11 @@ public class Reading {
 		this.month = month;
 		this.year = year;
 		this.quantity = quantity;
+	}
+
+	@Override
+	protected Reading clone() {
+		return new Reading(this.customer, this.quantity, this.month, this.year);
 	}
 
 	public int month() {
