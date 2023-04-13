@@ -6,6 +6,7 @@ public class Reading implements Cloneable {
 	private final int month;
 	private final int year;
 	private int baseCharge;
+	private int taxableCharge;
 
 	public Reading(final String customer, final int quantity, final int month, final int year) {
 		this.customer = customer;
@@ -37,5 +38,13 @@ public class Reading implements Cloneable {
 
 	public int getBaseCharge() {
 		return this.baseCharge;
+	}
+
+	public void setTaxableCharge(int taxableCharge) {
+		this.taxableCharge = taxableCharge;
+	}
+
+	public int getTaxableCharge() {
+		return this.taxableCharge;
 	}
 }

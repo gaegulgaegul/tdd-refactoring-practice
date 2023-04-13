@@ -11,17 +11,18 @@ class CarMeterTest {
 	@DisplayName("클라이언트 1 - 기본 가격 측정")
 	@Test
 	void client1() {
-		Reading aReading = acquireReading();
-		int baseCharge = baseRate(aReading.month(), aReading.year()) * aReading.quantity();
+		Reading rawReading = acquireReading();
+		Reading aReading = enrichReading(rawReading);
+		int baseCharge = aReading.getBaseCharge();
 		assertThat(baseCharge).isEqualTo(0);
 	}
 
 	@DisplayName("클라이언트 2 - 차 소비량 면세 가격 측정")
 	@Test
 	void client2() {
-		Reading aReading = acquireReading();
-		int base = (baseRate(aReading.month(), aReading.year()) * aReading.quantity());
-		int taxableCharge = Math.max(0, base - taxThreshold(aReading.year()));
+		Reading rawReading = acquireReading();
+		Reading aReading = enrichReading(rawReading);
+		int taxableCharge = aReading.getTaxableCharge();
 		assertThat(taxableCharge).isEqualTo(0);
 	}
 
@@ -53,6 +54,7 @@ class CarMeterTest {
 	private Reading enrichReading(Reading original) {
 		Reading result = original.clone();
 		result.setBaseCharge(calculateBaseCharge(result));
+		result.setTaxableCharge(Math.max(0, result.getBaseCharge() - taxThreshold(result.year())));
 		return result;
 	}
 }
