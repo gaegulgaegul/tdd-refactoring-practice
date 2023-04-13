@@ -3,12 +3,16 @@ package me.gaegul.refactoring.ch06.extract_function;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("함수 추출하기 - 고객의 채무 사항 출력")
-public class DebtStatusTest {
+class DebtStatusTest {
+
+    private static final String DEADLINE = LocalDate.now().plusMonths(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
     @DisplayName("유효범위를 벗어나는 변수가 없을 때")
     @Test
@@ -21,6 +25,6 @@ public class DebtStatusTest {
                 "**********************\n" +
                 "고객명: 홍길동\n" +
                 "채무액: 300\n" +
-                "마감일: 2023-04-19");
+                "마감일: " + DEADLINE);
     }
 }
