@@ -28,4 +28,12 @@ public class Reading {
 	public int quantity() {
 		return this.quantity;
 	}
+
+	int baseCharge() {
+		return baseRate(month(), year()) * quantity();
+	}
+
+	public int baseRate(int month, int year) {
+		return 0;
+	}
 }

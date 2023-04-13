@@ -13,7 +13,7 @@ class CarMeterTest {
 	void client1() {
 		Reading rawReading = acquireReading();
 		Reading aReading = new Reading(rawReading);
-		int baseCharge = baseRate(rawReading.month(), rawReading.year()) * rawReading.quantity();
+		int baseCharge = aReading.baseRate(rawReading.month(), rawReading.year()) * rawReading.quantity();
 		assertThat(baseCharge).isEqualTo(1);
 	}
 
@@ -21,7 +21,7 @@ class CarMeterTest {
 	@Test
 	void client2() {
 		Reading aReading = acquireReading();
-		int base = (baseRate(aReading.month(), aReading.year()) * aReading.quantity());
+		int base = (aReading.baseRate(aReading.month(), aReading.year()) * aReading.quantity());
 		int taxableCharge = Math.max(0, base - taxThreshold(aReading.year()));
 		assertThat(taxableCharge).isEqualTo(1);
 	}
@@ -30,7 +30,7 @@ class CarMeterTest {
 	@Test
 	void client3() {
 		Reading aReading = acquireReading();
-		int basicChargeAmount = calculateBaseCharge(aReading);
+		int basicChargeAmount = aReading.baseCharge();
 		assertThat(basicChargeAmount).isEqualTo(1);
 	}
 
@@ -38,15 +38,7 @@ class CarMeterTest {
 		return 0;
 	}
 
-	private int calculateBaseCharge(Reading aReading) {
-		return baseRate(aReading.month(), aReading.year()) * aReading.quantity();
-	}
-
-	private int baseRate(int month, int year) {
-		return 0;
-	}
-
 	private Reading acquireReading() {
-		return new Reading("ivan", 2017, 10, 5);
+		return new Reading("ivan", 10, 5, 2017);
 	}
 }
