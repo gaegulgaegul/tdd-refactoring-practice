@@ -46,6 +46,6 @@ class CarMeterTest {
 	}
 
 	private Reading acquireReading() {
-		return null;
+		return new Reading("ivan", 2017, 10, 5);
 	}
 }

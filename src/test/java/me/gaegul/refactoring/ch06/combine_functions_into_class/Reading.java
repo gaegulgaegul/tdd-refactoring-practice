@@ -1,15 +1,27 @@
 package me.gaegul.refactoring.ch06.combine_functions_into_class;
 
 public class Reading {
+	private final String customer;
+	private final int quantity;
+	private final int month;
+	private final int year;
+
+	public Reading(final String customer, final int quantity, final int month, final int year) {
+		this.customer = customer;
+		this.month = month;
+		this.year = year;
+		this.quantity = quantity;
+	}
+
 	public int month() {
-		return 0;
+		return this.month;
 	}
 
 	public int year() {
-		return 0;
+		return this.year;
 	}
 
 	public int quantity() {
-		return 0;
+		return this.quantity;
 	}
 }
