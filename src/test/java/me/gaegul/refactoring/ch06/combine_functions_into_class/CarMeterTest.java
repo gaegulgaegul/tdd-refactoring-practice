@@ -20,7 +20,8 @@ class CarMeterTest {
 	@DisplayName("클라이언트 2 - 차 소비량 면세 가격 측정")
 	@Test
 	void client2() {
-		Reading aReading = acquireReading();
+		Reading rawReading = acquireReading();
+		Reading aReading = new Reading(rawReading);
 		int taxableCharge = aReading.taxableCharge();
 		assertThat(taxableCharge).isEqualTo(1);
 	}

@@ -17,20 +17,8 @@ public class Reading {
 		this(aReading.customer, aReading.quantity, aReading.month, aReading.year);
 	}
 
-	public int month() {
-		return this.month;
-	}
-
-	public int year() {
-		return this.year;
-	}
-
-	public int quantity() {
-		return this.quantity;
-	}
-
 	int baseCharge() {
-		return baseRate(month, year) * quantity();
+		return baseRate(month, year) * this.quantity;
 	}
 
 	int taxableCharge() {
