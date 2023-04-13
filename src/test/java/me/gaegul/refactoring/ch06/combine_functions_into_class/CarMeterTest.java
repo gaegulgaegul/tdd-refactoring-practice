@@ -11,8 +11,9 @@ class CarMeterTest {
 	@DisplayName("클라이언트 1 - 기본 가격 측정")
 	@Test
 	void client1() {
-		Reading aReading = acquireReading();
-		int baseCharge = baseRate(aReading.month(), aReading.year()) * aReading.quantity();
+		Reading rawReading = acquireReading();
+		Reading aReading = new Reading(rawReading);
+		int baseCharge = baseRate(rawReading.month(), rawReading.year()) * rawReading.quantity();
 		assertThat(baseCharge).isEqualTo(1);
 	}
 

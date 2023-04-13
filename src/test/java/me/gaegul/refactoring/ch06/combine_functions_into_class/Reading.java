@@ -13,6 +13,10 @@ public class Reading {
 		this.quantity = quantity;
 	}
 
+	public Reading(Reading aReading) {
+		this(aReading.customer, aReading.quantity, aReading.month, aReading.year);
+	}
+
 	public int month() {
 		return this.month;
 	}
