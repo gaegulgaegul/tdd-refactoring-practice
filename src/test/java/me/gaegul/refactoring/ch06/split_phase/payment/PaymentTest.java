@@ -1,4 +1,4 @@
-package me.gaegul.refactoring.ch06.split_phase;
+package me.gaegul.refactoring.ch06.split_phase.payment;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
