@@ -18,13 +18,14 @@ public class JsonFileApp {
 	}
 
 	static long run(String[] args) throws IOException {
-		if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-		String filename = args[args.length - 1];
-		File input = Paths.get(filename).toFile();
+		return countOrder(new CommandLine(args));
+	}
+
+	private static long countOrder(CommandLine commandLine) throws IOException {
+		File input = Paths.get(commandLine.filename()).toFile();
 		ObjectMapper mapper = new ObjectMapper();
 		Order[] orders = mapper.readValue(input, Order[].class);
-
-		if (Stream.of(args).anyMatch(arg -> "-r".equals(arg))) {
+		if (commandLine.onlyCountReady()) {
 			return Stream.of(orders)
 				.filter(o -> "ready".equals(o.status))
 				.count();
@@ -40,6 +41,24 @@ public class JsonFileApp {
 
 		void setStatus(final String status) {
 			this.status = status;
+		}
+	}
+
+	private static class CommandLine {
+		String[] args;
+
+		public CommandLine(final String[] args) {
+			if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+
+			this.args = args;
+		}
+
+		private boolean onlyCountReady() {
+			return Stream.of(args).anyMatch(arg -> "-r".equals(arg));
+		}
+
+		private String filename() {
+			return args[args.length - 1];
 		}
 	}
 }
