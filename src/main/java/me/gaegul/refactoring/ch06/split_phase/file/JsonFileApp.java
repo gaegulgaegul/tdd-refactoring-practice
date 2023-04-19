@@ -47,7 +47,7 @@ public class JsonFileApp {
 	private static class CommandLine {
 		String[] args;
 
-		public CommandLine(final String[] args) {
+		CommandLine(final String[] args) {
 			if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
 
 			this.args = args;
