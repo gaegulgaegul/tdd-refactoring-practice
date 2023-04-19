@@ -3,6 +3,8 @@ package me.gaegul.refactoring.ch06.split_phase.file;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,16 +24,26 @@ public class JsonFileApp {
 	}
 
 	private static long countOrder(CommandLine commandLine) throws IOException {
-		File input = Paths.get(commandLine.filename()).toFile();
-		ObjectMapper mapper = new ObjectMapper();
-		Order[] orders = mapper.readValue(input, Order[].class);
-		if (commandLine.onlyCountReady()) {
-			return Stream.of(orders)
-				.filter(o -> "ready".equals(o.status))
-				.count();
-		} else {
-			return orders.length;
+		Orders orders = OrdersReader.of(commandLine.filename()).read();
+		return orders.count(commandLine.onlyCountReady());
+	}
+
+	static class Orders {
+		List<Order> orders;
+
+		Orders(final Order[] orders) {
+			this.orders = Arrays.asList(orders);
 		}
+
+		private long count(boolean onlyCountReady) {
+			if (!onlyCountReady) {
+				return orders.size();
+			}
+			return orders.stream()
+				.filter(Order::isReady)
+				.count();
+		}
+
 	}
 
 	static class Order {
@@ -42,9 +54,13 @@ public class JsonFileApp {
 		void setStatus(final String status) {
 			this.status = status;
 		}
+
+		private boolean isReady() {
+			return "ready".equals(status);
+		}
 	}
 
-	private static class CommandLine {
+	static class CommandLine {
 		String[] args;
 
 		CommandLine(final String[] args) {
@@ -53,12 +69,33 @@ public class JsonFileApp {
 			this.args = args;
 		}
 
-		private boolean onlyCountReady() {
+		boolean onlyCountReady() {
 			return Stream.of(args).anyMatch(arg -> "-r".equals(arg));
 		}
 
-		private String filename() {
+		String filename() {
 			return args[args.length - 1];
+		}
+	}
+
+	static class OrdersReader {
+		private final File input;
+		private final ObjectMapper mapper;
+
+		OrdersReader(File input, ObjectMapper mapper) {
+			this.input = input;
+			this.mapper = new ObjectMapper();
+		}
+
+		static OrdersReader of(String filename) {
+			return new OrdersReader(
+				Paths.get(filename).toFile(),
+				new ObjectMapper()
+			);
+		}
+
+		Orders read() throws IOException {
+			return new Orders(mapper.readValue(input, Order[].class));
 		}
 	}
 }
