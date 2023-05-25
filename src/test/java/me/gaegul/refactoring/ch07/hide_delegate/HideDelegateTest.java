@@ -18,6 +18,6 @@ class HideDelegateTest {
 		Person person = new Person("장그레");
 		person.setDepartment(department);
 
-		assertThat(person.department().manager()).isEqualTo("오상식");
+		assertThat(person.departmentManager()).isEqualTo("오상식");
 	}
 }
