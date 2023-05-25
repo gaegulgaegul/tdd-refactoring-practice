@@ -11,7 +11,7 @@ class InlineClassTest {
 	@DisplayName("배송 추적")
 	@Test
 	void trackingInformation() {
-		Shipment shipment = new Shipment(new TrackingInformation("쿠팡", "TEAKBAE|5-8"));
+		Shipment shipment = new Shipment("쿠팡", "TEAKBAE|5-8");
 		assertThat(shipment.trackingInfo()).isEqualTo("쿠팡: TEAKBAE|5-8");
 	}
 }

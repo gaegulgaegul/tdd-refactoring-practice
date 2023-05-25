@@ -1,21 +1,27 @@
 package me.gaegul.refactoring.ch07.inline_class;
 
 public class Shipment {
-	private TrackingInformation trackingInformation;
+	private String shippingCompany;
+	private String trackingNumber;
 
-	public Shipment(TrackingInformation trackingInformation) {
-		this.trackingInformation = trackingInformation;
+	public Shipment(String shippingCompany, String trackingNumber) {
+		this.shippingCompany = shippingCompany;
+		this.trackingNumber = trackingNumber;
 	}
 
-	public TrackingInformation trackingInformation() {
-		return this.trackingInformation;
+	public String shippingCompany() {
+		return this.shippingCompany;
 	}
 
-	public void setTrackingInformation(final TrackingInformation trackingInformation) {
-		this.trackingInformation = trackingInformation;
+	public void setShippingCompany(final String shippingCompany) {
+		this.shippingCompany = shippingCompany;
+	}
+
+	public String trackingNumber() {
+		return this.trackingNumber;
 	}
 
 	public String trackingInfo() {
-		return this.trackingInformation.display();
+		return String.format("%s: %s", shippingCompany, trackingNumber);
 	}
 }
