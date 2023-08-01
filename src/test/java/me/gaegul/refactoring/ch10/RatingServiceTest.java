@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("변형 동작을 다형성으로 표현하기")
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-public class RatingServiceTest {
+class RatingServiceTest {
 
     RatingService ratingService;
 
