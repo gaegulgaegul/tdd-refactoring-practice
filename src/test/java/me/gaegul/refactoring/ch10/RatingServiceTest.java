@@ -22,7 +22,7 @@ public class RatingServiceTest {
     }
 
     @Test
-    void 선박의_항해_투자_등급_계산() {
+    void 선박의_항해_투자_B등급_계산() {
         final Voyage voyage = new Voyage("서인도", 10);
         final List<History> history = List.of(
                 new History("동인도", 5),
@@ -32,5 +32,18 @@ public class RatingServiceTest {
         );
         String myRating = ratingService.rating(voyage, history);
         assertThat(myRating).isEqualTo("B");
+    }
+
+    @Test
+    void 선박의_항해_투자_A등급_계산() {
+        final Voyage voyage = new Voyage("중국", 13);
+        final List<History> history = List.of(
+            new History("동인도", 5),
+            new History("서인도", 13),
+            new History("중국", 14),
+            new History("서아프리카", 7)
+        );
+        String myRating = ratingService.rating(voyage, history);
+        assertThat(myRating).isEqualTo("A");
     }
 }

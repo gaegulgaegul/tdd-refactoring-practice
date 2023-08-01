@@ -27,7 +27,7 @@ public class RatingService {
         int result = 1;
         if (voyage.length() > 4) result += 2;
         if (voyage.length() > 8) result += voyage.length() - 8;
-        if (List.of("중국", "동인도").contains(voyage.getZone())) result +=4;
+        if (List.of("중국", "동인도").contains(voyage.getZone())) result += 4;
         return Math.max(result, 0);
     }
 
