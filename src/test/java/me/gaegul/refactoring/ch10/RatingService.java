@@ -11,7 +11,7 @@ public class RatingService {
      * @return
      */
     public String rating(final Voyage voyage, final List<History> history) {
-        return new Rating(voyage, history).getValue();
+        return createRating(voyage, history).getValue();
     }
 
     public Rating createRating(final Voyage voyage, final List<History> history) {
@@ -28,8 +28,8 @@ public class RatingService {
         }
 
         @Override
-        int captainHistoryRisk(final Voyage voyage, final List<History> history) {
-            int result = super.captainHistoryRisk(voyage, history) - 2;
+        int captainHistoryRisk() {
+            int result = super.captainHistoryRisk() - 2;
             return Math.max(result, 0);
         }
 
@@ -66,22 +66,20 @@ public class RatingService {
 
         /**
          * 선장의 항해 이력 위험요소
-         * @param voyage
-         * @param history
          * @return
          */
-        int captainHistoryRisk(final Voyage voyage, final List<History> history) {
+        int captainHistoryRisk() {
             int result = 1;
-            if (history.size() < 5)
+            if (this.history.size() < 5)
                 result += 4;
-            result += history.stream().filter(item -> item.getProfit() < 0).count();
+            result += this.history.stream().filter(item -> item.getProfit() < 0).count();
             return Math.max(result, 0);
         }
 
-        private String getValue() {
+        String getValue() {
             final int vpf = voyageProfitFactor();
             final int vr = voyageRisk();
-            final int chr = captainHistoryRisk(this.voyage, this.history);
+            final int chr = captainHistoryRisk();
             if (vpf * 3 > (vr + chr * 2))
                 return "A";
             return "B";
@@ -89,10 +87,9 @@ public class RatingService {
 
         /**
          * 항해 경로 위험요소
-         *
          * @return
          */
-        private int voyageRisk() {
+        int voyageRisk() {
             int result = 1;
             if (this.voyage.length() > 4)
                 result += 2;
@@ -118,23 +115,20 @@ public class RatingService {
             return result;
         }
 
+        /**
+         * 목적지 거리를 통해 팩터 반환
+         * @return
+         */
         int voyageLengthFactor() {
-            int result = 0;
-            if (this.voyage.length() > 14) result -= 1;
-            return result;
-        }
-
-        int historyLengthFactor() {
-            return this.history.size() > 8 ? 1 : 0;
+            return this.voyage.length() > 14 ? -1 : 0;
         }
 
         /**
-         * 중국을 경유하는가?
-         * @param history
+         * 이력 길이를 통해 팩터 반환
          * @return
          */
-        private boolean hasChina(final List<History> history) {
-            return history.stream().anyMatch(item -> "중국".equals(item.getZone()));
+        int historyLengthFactor() {
+            return this.history.size() > 8 ? 1 : 0;
         }
     }
 }
