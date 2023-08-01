@@ -32,6 +32,15 @@ public class RatingService {
             int result = super.captainHistoryRisk(voyage, history) - 2;
             return Math.max(result, 0);
         }
+
+        @Override
+        int voyageAndHistoryLengthFactor() {
+            int result = 3;
+            if (this.history().size() > 10) result += 1;
+            if (this.voyage().length() > 12) result += 1;
+            if (this.voyage().length() > 18) result -= 1;
+            return result;
+        }
     }
 
     public static class Rating {
@@ -41,6 +50,14 @@ public class RatingService {
         public Rating(final Voyage voyage, final List<History> history) {
             this.voyage = voyage;
             this.history = history;
+        }
+
+        public Voyage voyage() {
+            return this.voyage;
+        }
+
+        public List<History> history() {
+            return this.history;
         }
 
         /**
@@ -60,8 +77,8 @@ public class RatingService {
         }
 
         private String getValue() {
-            final int vpf = voyageProfitFactor(this.voyage, this.history);
-            final int vr = voyageRisk(this.voyage);
+            final int vpf = voyageProfitFactor();
+            final int vr = voyageRisk();
             final int chr = captainHistoryRisk(this.voyage, this.history);
             if (vpf * 3 > (vr + chr * 2))
                 return "A";
@@ -70,18 +87,39 @@ public class RatingService {
 
         /**
          * 항해 경로 위험요소
-         * @param voyage
+         *
          * @return
          */
-        private int voyageRisk(final Voyage voyage) {
+        private int voyageRisk() {
             int result = 1;
-            if (voyage.length() > 4)
+            if (this.voyage.length() > 4)
                 result += 2;
-            if (voyage.length() > 8)
-                result += voyage.length() - 8;
-            if (List.of("중국", "동인도").contains(voyage.getZone()))
+            if (this.voyage.length() > 8)
+                result += this.voyage.length() - 8;
+            if (List.of("중국", "동인도").contains(this.voyage.getZone()))
                 result += 4;
             return Math.max(result, 0);
+        }
+
+        /**
+         * 수익 요인
+         * @return
+         */
+        int voyageProfitFactor() {
+            int result = 2;
+            if ("중국".equals(this.voyage.getZone()))
+                result += 1;
+            if ("동인도".equals(this.voyage.getZone()))
+                result += 1;
+            result = voyageAndHistoryLengthFactor();
+            return result;
+        }
+
+        int voyageAndHistoryLengthFactor() {
+            int result = 0;
+            if (this.history.size() > 8) result += 1;
+            if (this.voyage.length() > 14) result -= 1;
+            return result;
         }
 
         /**
@@ -91,35 +129,6 @@ public class RatingService {
          */
         private boolean hasChina(final List<History> history) {
             return history.stream().anyMatch(item -> "중국".equals(item.getZone()));
-        }
-
-        /**
-         * 수익 요인
-         * @param voyage
-         * @param history
-         * @return
-         */
-        private int voyageProfitFactor(final Voyage voyage, final List<History> history) {
-            int result = 2;
-            if ("중국".equals(voyage.getZone()))
-                result += 1;
-            if ("동인도".equals(voyage.getZone()))
-                result += 1;
-            if ("중국".equals(voyage.getZone()) && hasChina(history)) {
-                result += 3;
-                if (history.size() > 10)
-                    result += 1;
-                if (voyage.length() > 12)
-                    result += 1;
-                if (voyage.length() > 18)
-                    result -= 1;
-            } else {
-                if (history.size() > 8)
-                    result += 1;
-                if (voyage.length() > 14)
-                    result -= 1;
-            }
-            return result;
         }
     }
 }
