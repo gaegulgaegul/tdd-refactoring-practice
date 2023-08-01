@@ -2,8 +2,13 @@ package me.gaegul.refactoring.ch10;
 
 public class History {
 
-    private int profit;
     private String zone;
+    private int profit;
+
+    public History(String zone, int profit) {
+        this.zone = zone;
+        this.profit = profit;
+    }
 
     public int getProfit() {
         return this.profit;
