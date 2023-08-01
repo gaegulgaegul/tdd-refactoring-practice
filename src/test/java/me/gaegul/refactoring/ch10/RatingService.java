@@ -34,12 +34,16 @@ public class RatingService {
         }
 
         @Override
-        int voyageAndHistoryLengthFactor() {
+        int voyageLengthFactor() {
             int result = 3;
-            if (this.history().size() > 10) result += 1;
             if (this.voyage().length() > 12) result += 1;
             if (this.voyage().length() > 18) result -= 1;
             return result;
+        }
+
+        @Override
+        int historyLengthFactor() {
+            return this.history().size() > 10 ? 1 : 0;
         }
     }
 
@@ -71,8 +75,6 @@ public class RatingService {
             if (history.size() < 5)
                 result += 4;
             result += history.stream().filter(item -> item.getProfit() < 0).count();
-            if ("중국".equals(voyage.getZone()) && hasChina(history))
-                result -= 2;
             return Math.max(result, 0);
         }
 
@@ -111,15 +113,19 @@ public class RatingService {
                 result += 1;
             if ("동인도".equals(this.voyage.getZone()))
                 result += 1;
-            result = voyageAndHistoryLengthFactor();
+            result += historyLengthFactor();
+            result += voyageLengthFactor();
             return result;
         }
 
-        int voyageAndHistoryLengthFactor() {
+        int voyageLengthFactor() {
             int result = 0;
-            if (this.history.size() > 8) result += 1;
             if (this.voyage.length() > 14) result -= 1;
             return result;
+        }
+
+        int historyLengthFactor() {
+            return this.history.size() > 8 ? 1 : 0;
         }
 
         /**
