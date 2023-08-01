@@ -14,6 +14,26 @@ public class RatingService {
         return new Rating(voyage, history).getValue();
     }
 
+    public Rating createRating(final Voyage voyage, final List<History> history) {
+        if ("중국".equals(voyage.getZone()) && history.stream().anyMatch(item -> "중국".equals(item.getZone()))) {
+            return new ExperiencedChinaRaing(voyage, history);
+        }
+        return new Rating(voyage, history);
+    }
+
+    public static class ExperiencedChinaRaing extends Rating {
+
+        public ExperiencedChinaRaing(Voyage voyage, List<History> history) {
+            super(voyage, history);
+        }
+
+        @Override
+        int captainHistoryRisk(final Voyage voyage, final List<History> history) {
+            int result = super.captainHistoryRisk(voyage, history) - 2;
+            return Math.max(result, 0);
+        }
+    }
+
     public static class Rating {
         private final Voyage voyage;
         private final List<History> history;
@@ -21,6 +41,22 @@ public class RatingService {
         public Rating(final Voyage voyage, final List<History> history) {
             this.voyage = voyage;
             this.history = history;
+        }
+
+        /**
+         * 선장의 항해 이력 위험요소
+         * @param voyage
+         * @param history
+         * @return
+         */
+        int captainHistoryRisk(final Voyage voyage, final List<History> history) {
+            int result = 1;
+            if (history.size() < 5)
+                result += 4;
+            result += history.stream().filter(item -> item.getProfit() < 0).count();
+            if ("중국".equals(voyage.getZone()) && hasChina(history))
+                result -= 2;
+            return Math.max(result, 0);
         }
 
         private String getValue() {
@@ -45,22 +81,6 @@ public class RatingService {
                 result += voyage.length() - 8;
             if (List.of("중국", "동인도").contains(voyage.getZone()))
                 result += 4;
-            return Math.max(result, 0);
-        }
-
-        /**
-         * 선장의 항해 이력 위험요소
-         * @param voyage
-         * @param history
-         * @return
-         */
-        private int captainHistoryRisk(final Voyage voyage, final List<History> history) {
-            int result = 1;
-            if (history.size() < 5)
-                result += 4;
-            result += history.stream().filter(item -> item.getProfit() < 0).count();
-            if ("중국".equals(voyage.getZone()) && hasChina(history))
-                result -= 2;
             return Math.max(result, 0);
         }
 
