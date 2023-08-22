@@ -123,4 +123,30 @@ class InstallInfraServiceTest {
 			}
 		}
 	}
+
+	@Nested
+	class client5_메서드는 {
+
+		@Nested
+		class 미확인_고객을_전달하면 {
+
+			@Test
+			void 미확인_거주자가_반환된다() {
+				final Customer customer = new UnknownCustomer();
+				final String result = sut.client5(customer);
+				assertThat(result).isEqualTo("미확인 거주자");
+			}
+		}
+
+		@Nested
+		class 뽀로로_고객을_전달하면 {
+
+			@Test
+			void 뽀로로가_반환된다() {
+				final Customer customer = new Customer("뽀로로");
+				final String result = sut.client5(customer);
+				assertThat(result).isEqualTo("뽀로로");
+			}
+		}
+	}
 }
