@@ -1,4 +1,4 @@
-package me.gaegul.refactoring.ch10.no5;
+package me.gaegul.refactoring.ch10.no5.sample;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,6 +8,12 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
+import me.gaegul.refactoring.ch10.no5.sample.BillingPlan;
+import me.gaegul.refactoring.ch10.no5.sample.Customer;
+import me.gaegul.refactoring.ch10.no5.sample.CustomerOfInfraService;
+import me.gaegul.refactoring.ch10.no5.sample.Site;
+import me.gaegul.refactoring.ch10.no5.sample.UnknownCustomer;
 
 @DisplayName("특이 케이스 추가하기")
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)

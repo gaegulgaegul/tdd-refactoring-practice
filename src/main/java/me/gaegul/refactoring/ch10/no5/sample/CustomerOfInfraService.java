@@ -1,4 +1,4 @@
-package me.gaegul.refactoring.ch10.no5;
+package me.gaegul.refactoring.ch10.no5.sample;
 
 /**
  * 전력이 필요한 현장에 인프라 설치 서비스
