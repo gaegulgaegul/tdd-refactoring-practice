@@ -19,4 +19,8 @@ public class InstallInfraService {
 	public int client4(final Customer aCustomer) {
 		return aCustomer.paymentHistory().weeksDelinquentInLastYear();
 	}
+
+	public String client5(final Customer aCustomer) {
+		return aCustomer.isUnknown() ? "미확인 거주자" : aCustomer.name();
+	}
 }
