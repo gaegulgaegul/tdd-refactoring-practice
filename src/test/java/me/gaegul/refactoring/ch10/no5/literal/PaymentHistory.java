@@ -1,4 +1,4 @@
-package me.gaegul.refactoring.ch10.no5;
+package me.gaegul.refactoring.ch10.no5.literal;
 
 /**
  * 요금 이력

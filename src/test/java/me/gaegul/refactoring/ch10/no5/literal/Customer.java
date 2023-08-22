@@ -1,4 +1,4 @@
-package me.gaegul.refactoring.ch10.no5;
+package me.gaegul.refactoring.ch10.no5.literal;
 
 /**
  * 고객
@@ -35,5 +35,9 @@ public class Customer {
 
 	public boolean sameName(final String name) {
 		return this.name.equals(name);
+	}
+
+	public boolean isUnknown() {
+		return false;
 	}
 }

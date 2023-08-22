@@ -1,4 +1,4 @@
-package me.gaegul.refactoring.ch10.no5;
+package me.gaegul.refactoring.ch10.no5.literal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -55,7 +55,8 @@ class CustomerOfInfraServiceTest {
 
 			@Test
 			void basic_요금제를_반환한다() {
-				final Customer customer = new Customer(UNKNOWN_CUSTOMER);
+				final Site site = new Site(UNKNOWN_CUSTOMER);
+				final Customer customer = site.customer();
 				final BillingPlan result = sut.client2(customer);
 				assertThat(result).isEqualTo(BillingPlan.BASIC);
 			}
@@ -66,7 +67,8 @@ class CustomerOfInfraServiceTest {
 
 			@Test
 			void premium_요금제를_반환한다() {
-				final Customer customer = new Customer("뽀로로", BillingPlan.PREMIUM);
+				final Site site = new Site("뽀로로", BillingPlan.PREMIUM);
+				final Customer customer = site.customer();
 				final BillingPlan result = sut.client2(customer);
 				assertThat(result).isEqualTo(BillingPlan.PREMIUM);
 			}
@@ -81,7 +83,8 @@ class CustomerOfInfraServiceTest {
 
 			@Test
 			void 작년_주_당_지연일자_0을_반환한다() {
-				final Customer customer = new Customer(UNKNOWN_CUSTOMER);
+				final Site site = new Site(UNKNOWN_CUSTOMER);
+				final Customer customer = site.customer();
 				int result = sut.client3(customer);
 				assertThat(result).isZero();
 			}
@@ -92,7 +95,8 @@ class CustomerOfInfraServiceTest {
 
 			@Test
 			void 작년_주_당_지연일자_0이외의_값을_반환한다() {
-				final Customer customer = new Customer("뽀로로");
+				final Site site = new Site("뽀로로");
+				final Customer customer = site.customer();
 				int result = sut.client3(customer);
 				assertThat(result).isNotZero();
 			}
