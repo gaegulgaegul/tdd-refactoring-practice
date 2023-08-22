@@ -19,11 +19,4 @@ public class InstallInfraService {
 	public int client4(final Customer aCustomer) {
 		return aCustomer.paymentHistory().weeksDelinquentInLastYear();
 	}
-
-	private boolean isUnknown(final Customer aCustomer) {
-		if (!((aCustomer instanceof Customer) || (aCustomer.sameName(UnknownCustomer.NAME)))) {
-			throw new IllegalArgumentException("잘못된 값과 비교" + aCustomer.name());
-		}
-		return aCustomer.isUnknown();
-	}
 }
