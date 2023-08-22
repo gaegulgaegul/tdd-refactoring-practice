@@ -7,7 +7,7 @@ public class Site {
 	private final Customer customer;	// 고객
 
 	public Site(final String name) {
-		this.customer = UnknownCustomer.NAME.equals(name) ? new UnknownCustomer() : new Customer(name);
+		this.customer = new Customer(name);
 	}
 
 	public Customer customer() {
