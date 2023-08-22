@@ -20,13 +20,8 @@ public class CustomerOfInfraService {
 		return aCustomer.sameName("미확인 고객") ? BillingPlan.BASIC : aCustomer.billingPlan();
 	}
 
-	public void client3(final Customer aCustomer, final BillingPlan newPlan) {
-		if (!aCustomer.sameName("미확인 고객")) {
-			aCustomer.setBillingPlan(newPlan);
-		}
-	}
 
-	public int client4(final Customer aCustomer) {
+	public int client3(final Customer aCustomer) {
 		return aCustomer.sameName("미확인 고객") ? 0 : aCustomer.paymentHistory().weeksDelinquentInLastYear();
 	}
 }

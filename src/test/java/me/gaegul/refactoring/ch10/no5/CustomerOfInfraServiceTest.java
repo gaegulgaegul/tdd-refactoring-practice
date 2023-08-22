@@ -75,32 +75,6 @@ class CustomerOfInfraServiceTest {
 
 	@Nested
 	class client3_메서드는 {
-
-		@Nested
-		class 미확인_고객의_신규_요금제를_전달하면 {
-
-			@Test
-			void basic_요금제를_반환한다() {
-				final Customer customer = new Customer(UNKNOWN_CUSTOMER);
-				sut.client3(customer, BillingPlan.PREMIUM);
-				assertThat(customer.billingPlan()).isEqualTo(BillingPlan.BASIC);
-			}
-		}
-
-		@Nested
-		class 뽀로로_고객의_신규_요금제를_전달하면 {
-
-			@Test
-			void 신규_요금제를_반환한다() {
-				final Customer customer = new Customer("뽀로로");
-				sut.client3(customer, BillingPlan.PREMIUM);
-				assertThat(customer.billingPlan()).isEqualTo(BillingPlan.PREMIUM);
-			}
-		}
-	}
-	
-	@Nested
-	class client4_메서드는 {
 		
 		@Nested
 		class 미확인_고객을_전달하면 {
@@ -108,7 +82,7 @@ class CustomerOfInfraServiceTest {
 			@Test
 			void 작년_주_당_지연일자_0을_반환한다() {
 				final Customer customer = new Customer(UNKNOWN_CUSTOMER);
-				int result = sut.client4(customer);
+				int result = sut.client3(customer);
 				assertThat(result).isZero();
 			}
 		}
@@ -119,7 +93,7 @@ class CustomerOfInfraServiceTest {
 			@Test
 			void 작년_주_당_지연일자_0이외의_값을_반환한다() {
 				final Customer customer = new Customer("뽀로로");
-				int result = sut.client4(customer);
+				int result = sut.client3(customer);
 				assertThat(result).isNotZero();
 			}
 		}
