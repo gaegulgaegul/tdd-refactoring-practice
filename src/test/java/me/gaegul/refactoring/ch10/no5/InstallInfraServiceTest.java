@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class InstallInfraServiceTest {
 
-	public static final String UNKNOWN_CUSTOMER = "미확인 고객";
 	private InstallInfraService sut;
 
 	@BeforeEach
@@ -29,7 +28,7 @@ class InstallInfraServiceTest {
 
 			@Test
 			void 거주자가_반환된다() {
-				final Site site = new Site(UNKNOWN_CUSTOMER);
+				final Site site = new Site(UnknownCustomer.NAME);
 				final String result = sut.client1(site);
 				assertThat(result).isEqualTo("거주자");
 			}
@@ -55,7 +54,7 @@ class InstallInfraServiceTest {
 
 			@Test
 			void basic_요금제를_반환한다() {
-				final Customer customer = new Customer(UNKNOWN_CUSTOMER);
+				final Customer customer = new UnknownCustomer();
 				final BillingPlan result = sut.client2(customer);
 				assertThat(result).isEqualTo(BillingPlan.BASIC);
 			}
@@ -81,7 +80,7 @@ class InstallInfraServiceTest {
 
 			@Test
 			void basic_요금제를_반환한다() {
-				final Customer customer = new Customer(UNKNOWN_CUSTOMER);
+				final Customer customer = new UnknownCustomer();
 				sut.client3(customer, BillingPlan.PREMIUM);
 				assertThat(customer.billingPlan()).isEqualTo(BillingPlan.BASIC);
 			}
@@ -107,7 +106,7 @@ class InstallInfraServiceTest {
 
 			@Test
 			void 작년_주_당_지연일자_0을_반환한다() {
-				final Customer customer = new Customer(UNKNOWN_CUSTOMER);
+				final Customer customer = new UnknownCustomer();
 				int result = sut.client4(customer);
 				assertThat(result).isZero();
 			}

@@ -6,27 +6,24 @@ package me.gaegul.refactoring.ch10.no5;
 public class InstallInfraService {
 
 	public String client1(final Site site) {
-		final Customer aCustomer = site.customer();
-		String customerName;
-		if (aCustomer.sameName("미확인 고객")) {
-			customerName = "거주자";
-		} else {
-			customerName = aCustomer.name();
-		}
-		return customerName;
+		return site.customer().name();
 	}
 
 	public BillingPlan client2(final Customer aCustomer) {
-		return aCustomer.sameName("미확인 고객") ? BillingPlan.BASIC : aCustomer.billingPlan();
+		return aCustomer.billingPlan();
 	}
-
 	public void client3(final Customer aCustomer, final BillingPlan newPlan) {
-		if (!aCustomer.sameName("미확인 고객")) {
-			aCustomer.setBillingPlan(newPlan);
-		}
+		aCustomer.setBillingPlan(newPlan);
 	}
 
 	public int client4(final Customer aCustomer) {
-		return aCustomer.sameName("미확인 고객") ? 0 : aCustomer.paymentHistory().weeksDelinquentInLastYear();
+		return aCustomer.paymentHistory().weeksDelinquentInLastYear();
+	}
+
+	private boolean isUnknown(final Customer aCustomer) {
+		if (!((aCustomer instanceof Customer) || (aCustomer.sameName(UnknownCustomer.NAME)))) {
+			throw new IllegalArgumentException("잘못된 값과 비교" + aCustomer.name());
+		}
+		return aCustomer.isUnknown();
 	}
 }
