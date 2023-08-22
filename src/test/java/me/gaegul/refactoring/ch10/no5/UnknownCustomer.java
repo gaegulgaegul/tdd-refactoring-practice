@@ -1,5 +1,8 @@
 package me.gaegul.refactoring.ch10.no5;
 
+/**
+ * 미확인 고객
+ */
 public class UnknownCustomer extends Customer {
 
 	public static final String NAME = "미확인 고객";

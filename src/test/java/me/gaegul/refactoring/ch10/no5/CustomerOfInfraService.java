@@ -3,7 +3,7 @@ package me.gaegul.refactoring.ch10.no5;
 /**
  * 전력이 필요한 현장에 인프라 설치 서비스
  */
-public class InstallInfraService {
+public class CustomerOfInfraService {
 
 	public String client1(final Site site) {
 		return site.customer().name();

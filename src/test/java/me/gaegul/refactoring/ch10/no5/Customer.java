@@ -4,7 +4,7 @@ package me.gaegul.refactoring.ch10.no5;
  * 고객
  */
 public class Customer {
-	private final String name;			// 고객명
+	private final String name;			    // 고객명
 	private BillingPlan billingPlan;		// 요금제
 
 	public Customer(final String name) {

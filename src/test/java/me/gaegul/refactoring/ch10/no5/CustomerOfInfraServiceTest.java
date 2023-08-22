@@ -11,13 +11,13 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("특이 케이스 추가하기")
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-class InstallInfraServiceTest {
+class CustomerOfInfraServiceTest {
 
-	private InstallInfraService sut;
+	private CustomerOfInfraService sut;
 
 	@BeforeEach
 	void setUp() {
-		this.sut = new InstallInfraService();
+		this.sut = new CustomerOfInfraService();
 	}
 
 	@Nested
