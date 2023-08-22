@@ -1,4 +1,4 @@
-package me.gaegul.refactoring.ch10;
+package me.gaegul.refactoring.ch10.no4;
 
 public class History {
 
