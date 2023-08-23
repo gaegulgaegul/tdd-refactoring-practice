@@ -5,10 +5,11 @@ package me.gaegul.refactoring.ch10.no5.convertion;
  */
 public class CustomerOfInfraService {
 
-	public String client1(final Site site) {
-		final Customer aCustomer = site.customer();
+	public String client1(final Site rawSite) {
+		final Site site = enrichSite(rawSite);
+		final Customer aCustomer = rawSite.customer();
 		String customerName;
-		if (aCustomer.sameName("미확인 고객")) {
+		if (isUnknown(aCustomer)) {
 			customerName = "거주자";
 		} else {
 			customerName = aCustomer.name();
@@ -17,11 +18,18 @@ public class CustomerOfInfraService {
 	}
 
 	public BillingPlan client2(final Customer aCustomer) {
-		return aCustomer.sameName("미확인 고객") ? BillingPlan.BASIC : aCustomer.billingPlan();
+		return isUnknown(aCustomer) ? BillingPlan.BASIC : aCustomer.billingPlan();
 	}
 
-
 	public int client3(final Customer aCustomer) {
-		return aCustomer.sameName("미확인 고객") ? 0 : aCustomer.paymentHistory().weeksDelinquentInLastYear();
+		return isUnknown(aCustomer) ? 0 : aCustomer.paymentHistory().weeksDelinquentInLastYear();
+	}
+
+	private boolean isUnknown(final Customer aCustomer) {
+		return aCustomer.sameName("미확인 고객");
+	}
+
+	private Site enrichSite(final Site rawSite) {
+		return (Site) rawSite.clone();
 	}
 }

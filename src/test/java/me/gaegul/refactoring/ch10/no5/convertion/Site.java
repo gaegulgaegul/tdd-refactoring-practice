@@ -3,7 +3,7 @@ package me.gaegul.refactoring.ch10.no5.convertion;
 /**
  * 전력이 필요한 현장
  */
-public class Site {
+public class Site implements Cloneable {
 	private String name;
 	private String location;
 	private Customer customer;	// 고객
@@ -33,5 +33,14 @@ public class Site {
 
 	public String location() {
 		return this.location;
+	}
+
+	@Override
+	protected Object clone() {
+		final Site site = new Site();
+		site.name = this.name;
+		site.location = this.location;
+		site.customer = this.customer;
+		return site;
 	}
 }
