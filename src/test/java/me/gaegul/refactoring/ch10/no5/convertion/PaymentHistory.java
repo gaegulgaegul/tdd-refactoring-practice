@@ -9,6 +9,10 @@ public class PaymentHistory {
 	public PaymentHistory() {
 	}
 
+	public PaymentHistory(int weeksDelinquentInLastYear) {
+		this.weeksDelinquentInLastYear = weeksDelinquentInLastYear;
+	}
+
 	public int weeksDelinquentInLastYear() {
 		return this.weeksDelinquentInLastYear;
 	}

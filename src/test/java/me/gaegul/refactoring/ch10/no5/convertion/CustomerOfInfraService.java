@@ -7,22 +7,16 @@ public class CustomerOfInfraService {
 
 	public String client1(final Site rawSite) {
 		final Site site = enrichSite(rawSite);
-		final Customer aCustomer = rawSite.customer();
-		String customerName;
-		if (isUnknown(aCustomer)) {
-			customerName = "거주자";
-		} else {
-			customerName = aCustomer.name();
-		}
-		return customerName;
+		final Customer aCustomer = site.customer();
+		return aCustomer.name();
 	}
 
-	public BillingPlan client2(final Customer aCustomer) {
-		return isUnknown(aCustomer) ? BillingPlan.BASIC : aCustomer.billingPlan();
+	public BillingPlan client2(final Site rawSite) {
+		return enrichSite(rawSite).customer().billingPlan();
 	}
 
-	public int client3(final Customer aCustomer) {
-		return isUnknown(aCustomer) ? 0 : aCustomer.paymentHistory().weeksDelinquentInLastYear();
+	public int client3(final Site rawSite) {
+		return enrichSite(rawSite).customer().paymentHistory().weeksDelinquentInLastYear();
 	}
 
 	private boolean isUnknown(final Customer aCustomer) {
@@ -30,6 +24,13 @@ public class CustomerOfInfraService {
 	}
 
 	private Site enrichSite(final Site rawSite) {
-		return (Site) rawSite.clone();
+		final Site result = (Site) rawSite.clone();
+		final Customer unknownCustomer = new Customer("거주자", BillingPlan.BASIC, 0, true);
+		if (isUnknown(result.customer())) {
+			result.setCustomer(unknownCustomer);
+		} else {
+			result.customer().setUnknown(false);
+		}
+		return result;
 	}
 }

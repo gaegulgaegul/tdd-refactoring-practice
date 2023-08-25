@@ -44,8 +44,6 @@ class CustomerOfInfraServiceTest {
 				final String result = sut.client1(site);
 				assertThat(result).isEqualTo("거주자");
 			}
-
-
 		}
 
 		@Nested
@@ -69,8 +67,7 @@ class CustomerOfInfraServiceTest {
 			@Test
 			void basic_요금제를_반환한다() {
 				final Site site = readSiteFor(UNKNOWN_SITE_JSON_PATH);
-				final Customer customer = site.customer();
-				final BillingPlan result = sut.client2(customer);
+				final BillingPlan result = sut.client2(site);
 				assertThat(result).isEqualTo(BillingPlan.BASIC);
 			}
 		}
@@ -81,8 +78,7 @@ class CustomerOfInfraServiceTest {
 			@Test
 			void plan_451_요금제를_반환한다() {
 				final Site site = readSiteFor(SITE_JSON_PATH);
-				final Customer customer = site.customer();
-				final BillingPlan result = sut.client2(customer);
+				final BillingPlan result = sut.client2(site);
 				assertThat(result).isEqualTo(BillingPlan.PLAN_451);
 			}
 		}
@@ -97,8 +93,7 @@ class CustomerOfInfraServiceTest {
 			@Test
 			void 작년_주_당_지연일자_0을_반환한다() {
 				final Site site = readSiteFor(UNKNOWN_SITE_JSON_PATH);
-				final Customer customer = site.customer();
-				int result = sut.client3(customer);
+				int result = sut.client3(site);
 				assertThat(result).isZero();
 			}
 		}
@@ -109,8 +104,7 @@ class CustomerOfInfraServiceTest {
 			@Test
 			void 작년_주_당_지연일자_0이외의_값을_반환한다() {
 				final Site site = readSiteFor(SITE_JSON_PATH);
-				final Customer customer = site.customer();
-				int result = sut.client3(customer);
+				int result = sut.client3(site);
 				assertThat(result).isNotZero();
 			}
 		}
