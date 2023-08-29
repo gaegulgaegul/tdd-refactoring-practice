@@ -11,9 +11,9 @@ public class HeatingPlanClientCode {
 	 * @param thermostat
 	 */
 	public void action(Thermostat thermostat) {
-		if (thePlan.getTargetTemperature() > thermostat.currentTemperature()) {
+		if (thePlan.getTargetTemperature(thermostat.selectedTemperature()) > thermostat.currentTemperature()) {
 			setToHeat();
-		} else if (thePlan.getTargetTemperature() < thermostat.currentTemperature()) {
+		} else if (thePlan.getTargetTemperature(thermostat.selectedTemperature()) < thermostat.currentTemperature()) {
 			setToCool();
 		} else {
 			setOff();
