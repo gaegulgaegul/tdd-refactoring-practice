@@ -2,6 +2,7 @@ package me.gaegul.refactoring.ch11;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -12,6 +13,13 @@ import org.junit.jupiter.api.Test;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class HeatingPlanTest {
 
+	private HeatingPlan heatingPlan;
+
+	@BeforeEach
+	void setUp() {
+		heatingPlan = new HeatingPlan();
+	}
+
 	@Nested
 	class getTargetTemperature_메서드는 {
 
@@ -20,10 +28,7 @@ class HeatingPlanTest {
 
 			@Test
 			void 최대_온도가_반환된다() {
-				final Thermostat thermostat = new Thermostat(HeatingPlan.MAX + 0.1);
-				final HeatingPlan heatingPlan = new HeatingPlan(thermostat);
-				final double result = heatingPlan.getTargetTemperature();
-				assertThat(result).isEqualTo(HeatingPlan.MAX);
+				assertTargetTemperature(HeatingPlan.MAX + 0.1, HeatingPlan.MAX);
 			}
 		}
 
@@ -32,10 +37,7 @@ class HeatingPlanTest {
 
 			@Test
 			void 최저_온도가_반환된다() {
-				final Thermostat thermostat = new Thermostat(HeatingPlan.MIN - 0.1);
-				final HeatingPlan heatingPlan = new HeatingPlan(thermostat);
-				final double result = heatingPlan.getTargetTemperature();
-				assertThat(result).isEqualTo(HeatingPlan.MIN);
+				assertTargetTemperature(HeatingPlan.MIN - 0.1, HeatingPlan.MIN);
 			}
 		}
 
@@ -44,28 +46,25 @@ class HeatingPlanTest {
 
 			@Test
 			void 온도_50도를_전달하면_해당_온도가_반환된다() {
-				final Thermostat thermostat = new Thermostat(50);
-				final HeatingPlan heatingPlan = new HeatingPlan(thermostat);
-				final double result = heatingPlan.getTargetTemperature();
-				assertThat(result).isEqualTo(50);
+				assertTargetTemperature(50, 50);
 			}
 
 			@Test
 			void 온도_16도를_전달하면_해당_온도가_반환된다() {
-				final Thermostat thermostat = new Thermostat(16);
-				final HeatingPlan heatingPlan = new HeatingPlan(thermostat);
-				final double result = heatingPlan.getTargetTemperature();
-				assertThat(result).isEqualTo(16);
+				assertTargetTemperature(16, 16);
 			}
 
 			@Test
 			void 온도_30도를_전달하면_해당_온도가_반환된다() {
-				final Thermostat thermostat = new Thermostat(30);
-				final HeatingPlan heatingPlan = new HeatingPlan(thermostat);
-				final double result = heatingPlan.getTargetTemperature();
-				assertThat(result).isEqualTo(30);
+				assertTargetTemperature(30, 30);
 			}
 		}
+	}
+
+	private void assertTargetTemperature(final double selectedTemperature, final double expected) {
+		final Thermostat thermostat = new Thermostat(selectedTemperature);
+		final double result = heatingPlan.getTargetTemperature(thermostat.selectedTemperature());
+		assertThat(result).isEqualTo(expected);
 	}
 
 }
