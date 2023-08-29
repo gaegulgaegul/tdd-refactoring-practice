@@ -1,5 +1,8 @@
 package me.gaegul.refactoring.ch11;
 
+/**
+ * 실내 온도 제어 시스템
+ */
 public class HeatingPlan {
 
 	protected static final double MAX = 50.0;
@@ -10,6 +13,10 @@ public class HeatingPlan {
 		this.thermostat = thermostat;
 	}
 
+	/**
+	 * 목표 온도 반환
+	 * @return
+	 */
 	public double getTargetTemperature() {
 		if (this.thermostat.selectedTemperature() > MAX) {
 			return MAX;
