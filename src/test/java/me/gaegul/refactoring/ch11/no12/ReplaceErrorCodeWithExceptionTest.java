@@ -87,7 +87,7 @@ class ReplaceErrorCodeWithExceptionTest {
 				sut.calculateStatus(order);
 				List<ErrorStatus> errorList = sut.getErrorList();
 				assertThat(errorList).hasSize(1);
-				assertThat(errorList.get(0).toString()).isEqualTo("");
+				assertThat(errorList.get(0).toString()).isEqualTo("ErrorStatus{order=OrderData{country='북한'}, status=-23}");
 			}
 		}
 
