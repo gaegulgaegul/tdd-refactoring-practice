@@ -1,4 +1,4 @@
-package me.gaegul.refactoring.ch11;
+package me.gaegul.refactoring.ch11.no06;
 
 /**
  * 온도 정보 관리

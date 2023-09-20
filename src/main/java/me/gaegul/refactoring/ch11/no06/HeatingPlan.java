@@ -1,4 +1,4 @@
-package me.gaegul.refactoring.ch11;
+package me.gaegul.refactoring.ch11.no06;
 
 /**
  * 실내 온도 제어 시스템

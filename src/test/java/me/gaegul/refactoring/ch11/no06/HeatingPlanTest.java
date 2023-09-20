@@ -1,4 +1,4 @@
-package me.gaegul.refactoring.ch11;
+package me.gaegul.refactoring.ch11.no06;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
