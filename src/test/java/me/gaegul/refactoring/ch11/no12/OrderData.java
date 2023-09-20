@@ -10,4 +10,11 @@ public class OrderData {
 	public String country() {
 		return this.country;
 	}
+
+	@Override
+	public String toString() {
+		return "OrderData{" +
+			"country='" + country + '\'' +
+			'}';
+	}
 }

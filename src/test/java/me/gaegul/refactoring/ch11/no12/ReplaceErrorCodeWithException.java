@@ -1,6 +1,7 @@
 package me.gaegul.refactoring.ch11.no12;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ReplaceErrorCodeWithException {
@@ -21,5 +22,13 @@ public class ReplaceErrorCodeWithException {
 		int shippingRules = localShippingRules(order.country());
 		if (shippingRules < 0) return shippingRules;
 		return shippingRules;
+	}
+
+	public void calculateStatus(OrderData order) {
+
+	}
+
+	public List<ErrorStatus> getErrorList() {
+		return null;
 	}
 }
