@@ -1,5 +1,7 @@
 package me.gaegul.refactoring.ch11.no12;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +9,7 @@ import java.util.Map;
 public class ReplaceErrorCodeWithException {
 
 	private static final Map<String, Integer> COUNTRY_DATA = new HashMap<>();
+	private static final List<ErrorStatus> ERROR_LIST = new ArrayList<>();
 
 	static {
 		COUNTRY_DATA.put("대한민국", 33);
@@ -25,10 +28,11 @@ public class ReplaceErrorCodeWithException {
 	}
 
 	public void calculateStatus(OrderData order) {
-
+		int status = calculateShippingCosts(order);
+		if (status < 0) ERROR_LIST.add(new ErrorStatus(order, status));
 	}
 
 	public List<ErrorStatus> getErrorList() {
-		return null;
+		return Collections.unmodifiableList(ERROR_LIST);
 	}
 }
