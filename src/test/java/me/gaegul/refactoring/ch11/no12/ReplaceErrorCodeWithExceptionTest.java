@@ -44,4 +44,32 @@ class ReplaceErrorCodeWithExceptionTest {
 			}
 		}
 	}
+
+	@Nested
+	class calculateShippingCosts_메서드는 {
+
+		@Nested
+		class 배송지의_규칙이_0보다_작으면 {
+
+			@Test
+			void 오류_코드를_반환한다() {
+				OrderData order = new OrderData("북한");
+				int result = sut.calculateShippingCosts(order);
+				assertThat(result).isEqualTo(-23);
+			}
+		}
+
+		@Nested
+		class 배송지의_규칙이_0보다_크면 {
+
+			@Test
+			void 규칙을_반환한다() {
+				OrderData order = new OrderData("대한민국");
+				int result = sut.calculateShippingCosts(order);
+				assertThat(result).isGreaterThan(0);
+				assertThat(result).isNotEqualTo(-23);
+				assertThat(result).isEqualTo(33);
+			}
+		}
+	}
 }
