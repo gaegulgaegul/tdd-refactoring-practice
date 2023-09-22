@@ -17,12 +17,8 @@ public class ResourcePool {
             result = Resource.create();
             allocated.add(result);
         } else {
-            try {
-                result = available.pop();
-                allocated.add(result);
-            } catch (NoSuchElementException e) {
-                throw new AssertionError("도달 불가");
-            }
+            result = available.pop();
+            allocated.add(result);
         }
         return result;
     }
