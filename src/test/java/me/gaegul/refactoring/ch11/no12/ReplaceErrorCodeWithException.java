@@ -23,20 +23,18 @@ public class ReplaceErrorCodeWithException {
 
 	public int calculateShippingCosts(OrderData order) {
 		int shippingRules = localShippingRules(order.country());
-		if (shippingRules < 0) return shippingRules;
+		if (shippingRules < 0) throw new RuntimeException("오류 코드가 다 사라지지 않았습니다.");
 		return shippingRules;
 	}
 
 	public void calculateStatus(OrderData order) {
-		int status = 0;
 		try {
-			status = calculateShippingCosts(order);
+			calculateShippingCosts(order);
 		} catch (OrderProcessingError e) {
 			ERROR_LIST.add(new ErrorStatus(order, e.code()));
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
-		if (status < 0) ERROR_LIST.add(new ErrorStatus(order, status));
 	}
 
 	public List<ErrorStatus> getErrorList() {
