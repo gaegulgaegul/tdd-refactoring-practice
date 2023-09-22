@@ -18,7 +18,7 @@ public class ReplaceErrorCodeWithException {
 	public int localShippingRules(String country) {
 		Integer data = COUNTRY_DATA.get(country);
 		if (data != null) return data.intValue();
-		return -23;
+		throw new OrderProcessingError(-23);
 	}
 
 	public int calculateShippingCosts(OrderData order) {
