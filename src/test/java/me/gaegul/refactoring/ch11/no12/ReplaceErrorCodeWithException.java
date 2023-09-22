@@ -23,7 +23,6 @@ public class ReplaceErrorCodeWithException {
 
 	public int calculateShippingCosts(OrderData order) {
 		int shippingRules = localShippingRules(order.country());
-		if (shippingRules < 0) throw new RuntimeException("오류 코드가 다 사라지지 않았습니다.");
 		return shippingRules;
 	}
 
