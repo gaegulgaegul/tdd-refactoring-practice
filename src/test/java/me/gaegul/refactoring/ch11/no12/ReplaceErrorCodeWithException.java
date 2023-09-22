@@ -31,6 +31,8 @@ public class ReplaceErrorCodeWithException {
 		int status = 0;
 		try {
 			status = calculateShippingCosts(order);
+		} catch (OrderProcessingError e) {
+			ERROR_LIST.add(new ErrorStatus(order, e.code()));
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage());
 		}
