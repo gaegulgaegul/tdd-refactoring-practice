@@ -1,6 +1,7 @@
 package me.gaegul.refactoring.ch11.no12;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 
@@ -40,9 +41,9 @@ class ReplaceErrorCodeWithExceptionTest {
 		class 존재하지_않는_국가인_경우 {
 
 			@Test
-			void 오류_코드를_반환한다() {
-				int result = sut.localShippingRules("북한");
-				assertThat(result).isEqualTo(-23);
+			void 예외가_발생한다() {
+				assertThatThrownBy(() -> sut.localShippingRules("북한"))
+						.isInstanceOf(OrderProcessingError.class);
 			}
 		}
 	}
@@ -54,10 +55,10 @@ class ReplaceErrorCodeWithExceptionTest {
 		class 배송지의_규칙이_0보다_작으면 {
 
 			@Test
-			void 오류_코드를_반환한다() {
+			void 예외를_반환한다() {
 				OrderData order = new OrderData("북한");
-				int result = sut.calculateShippingCosts(order);
-				assertThat(result).isEqualTo(-23);
+				assertThatThrownBy(() -> sut.calculateShippingCosts(order))
+						.isInstanceOf(OrderProcessingError.class);
 			}
 		}
 
