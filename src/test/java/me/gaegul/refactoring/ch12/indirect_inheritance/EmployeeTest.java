@@ -9,11 +9,6 @@ import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import me.gaegul.refactoring.ch12.direct_inheritance.EmployeeFactory;
-import me.gaegul.refactoring.ch12.direct_inheritance.Engineer;
-import me.gaegul.refactoring.ch12.direct_inheritance.Manager;
-import me.gaegul.refactoring.ch12.direct_inheritance.SalesPerson;
-
 @DisplayName("Employee_클래스의")
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class EmployeeTest {
@@ -47,24 +42,30 @@ class EmployeeTest {
 	}
 
 	@Nested
-	class capitalizedType_메서드는 {
+	class createEmployeeType_메서드는 {
 
 		@Test
-		void 엔지니어_타입인_경우_En을_반환한다() {
-			final Employee employee = new Employee("엔지니어", "engineer");
-			assertThat(employee.capitalizedType()).isEqualTo("En");
+		void 엔지니어_타입을_전달하면_Engineer_타입을_반환한다() {
+			assertThat(Employee.createEmployeeType("engineer"))
+				.isInstanceOf(Engineer.class);
 		}
 
 		@Test
-		void 매니저_타입인_경우_Ma을_반환한다() {
-			final Employee employee = new Employee("매니저", "manager");
-			assertThat(employee.capitalizedType()).isEqualTo("Ma");
+		void 매니저_타입을_전달하면_Manager_타입을_반환한다() {
+			assertThat(Employee.createEmployeeType("manager"))
+				.isInstanceOf(Manager.class);
 		}
 
 		@Test
-		void 영업사원_타입인_경우_Sa을_반환한다() {
-			final Employee employee = new Employee("영업사원", "salesperson");
-			assertThat(employee.capitalizedType()).isEqualTo("Sa");
+		void 영업사원_타입을_전달하면_SalesPerson_타입을_반환한다() {
+			assertThat(Employee.createEmployeeType("salesperson"))
+				.isInstanceOf(SalesPerson.class);
+		}
+
+		@Test
+		void 프로그래머_타입을_전달하면_예외가_발생한다() {
+			assertThatThrownBy(() -> Employee.createEmployeeType("programmer"))
+				.isInstanceOf(IllegalArgumentException.class);
 		}
 	}
 }
