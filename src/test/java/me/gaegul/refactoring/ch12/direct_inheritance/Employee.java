@@ -12,9 +12,13 @@ public class Employee {
 	}
 
 	public void validateType() {
-		if (!List.of("engineer", "manager", "salesperson").contains(this.type)) {
+		if (isNotDefinedEmployeeType()) {
 			throw new IllegalArgumentException(String.format("%s라는 직원 유형은 없습니다.", this.type));
 		}
+	}
+
+	protected boolean isNotDefinedEmployeeType() {
+		return !List.of("engineer", "manager", "salesperson").contains(this.type);
 	}
 
 	@Override
