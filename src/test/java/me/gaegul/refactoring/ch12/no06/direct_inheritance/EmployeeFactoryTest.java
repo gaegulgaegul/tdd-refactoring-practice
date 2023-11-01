@@ -1,4 +1,4 @@
-package me.gaegul.refactoring.ch12.direct_inheritance;
+package me.gaegul.refactoring.ch12.no06.direct_inheritance;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -8,6 +8,11 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
+import me.gaegul.refactoring.ch12.no06.direct_inheritance.EmployeeFactory;
+import me.gaegul.refactoring.ch12.no06.direct_inheritance.Engineer;
+import me.gaegul.refactoring.ch12.no06.direct_inheritance.Manager;
+import me.gaegul.refactoring.ch12.no06.direct_inheritance.SalesPerson;
 
 @DisplayName("EmployeeFactory_클래스의")
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)

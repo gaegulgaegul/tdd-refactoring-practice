@@ -1,4 +1,4 @@
-package me.gaegul.refactoring.ch12.indirect_inheritance;
+package me.gaegul.refactoring.ch12.no06.indirect_inheritance;
 
 public class EmployeeType {
 	private String value;
