@@ -17,8 +17,8 @@ public class NorwegianBlueParrot extends Bird {
 
 	@Override
 	public String plumage() {
-		if (this.voltage > 100) return "그을렸다.";
-		if (super.isEmptyPlumage()) return "예쁘다.";
+		if (this.voltage > 100) return "그을렸다";
+		if (super.isEmptyPlumage()) return "예쁘다";
 		return super.plumage();
 	}
 
