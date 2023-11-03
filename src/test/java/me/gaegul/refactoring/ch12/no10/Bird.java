@@ -22,7 +22,7 @@ public class Bird {
 			case "노르웨이 파랑 앵무":
 				return new NorwegianBlueParrotDelegate(data, this);
 			default:
-				return null;
+				return new SpeciesDelegate(data, this);
 		}
 	}
 
