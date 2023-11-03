@@ -17,6 +17,8 @@ public class Bird {
 		switch (data.get("type")) {
 			case "유럽 제비":
 				return new EuropeanSwallowDelegate();
+			case "아프리카 제비":
+				return new AfricanSwallowDelegate(data);
 			default:
 				return null;
 		}
