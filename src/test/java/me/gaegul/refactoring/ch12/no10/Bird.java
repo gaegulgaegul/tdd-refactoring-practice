@@ -5,10 +5,21 @@ import java.util.Map;
 public class Bird {
 	private String name;		// 이름
 	private String plumage;		// 깃털 생김새
+	private SpeciesDelegate speciesDelegate;
 
 	public Bird(Map<String, String> data) {
 		this.name = data.get("type");
 		this.plumage = data.get("plumage");
+		this.speciesDelegate = selectSpeciesDelegate(data);
+	}
+
+	private SpeciesDelegate selectSpeciesDelegate(Map<String, String> data) {
+		switch (data.get("type")) {
+			case "유럽 제비":
+				return new EuropeanSwallowDelegate();
+			default:
+				return null;
+		}
 	}
 
 	public String name() {
@@ -26,7 +37,7 @@ public class Bird {
 	 * 비행 속력
 	 */
 	public int airSpeedVelocity() {
-		return 0;
+		return this.speciesDelegate == null ? 0 : this.speciesDelegate.airSpeedVelocity();
 	}
 
 	/**
