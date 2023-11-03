@@ -20,7 +20,7 @@ public class Bird {
 			case "아프리카 제비":
 				return new AfricanSwallowDelegate(data);
 			case "노르웨이 파랑 앵무":
-				return new NorwegianBlueParrotDelegate(data);
+				return new NorwegianBlueParrotDelegate(data, this);
 			default:
 				return null;
 		}
@@ -31,6 +31,9 @@ public class Bird {
 	}
 
 	public String plumage() {
+		if (this.speciesDelegate instanceof NorwegianBlueParrotDelegate) {
+			return ((NorwegianBlueParrotDelegate) this.speciesDelegate).plumage();
+		}
 		if (isEmptyPlumage()) {
 			return "보통이다";
 		}
@@ -54,5 +57,9 @@ public class Bird {
 
 	SpeciesDelegate getSpeciesDelegate() {
 		return this.speciesDelegate;
+	}
+
+	String getPlumage() {
+		return this.plumage;
 	}
 }
