@@ -1,14 +1,14 @@
 package me.gaegul.refactoring.ch12.no10;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.Map;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
+import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Bird 클래스의")
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
@@ -37,6 +37,13 @@ class BirdTest {
 				Bird bird = BirdFactory.createBird(data);
 				assertThat(bird.plumage()).isEqualTo("보통이다");
 			}
+		}
+
+		@Test
+		void 비행속력은_기본값를_반환한다() {
+			Map<String, String> data = Map.of("type", "유럽 제비");
+			Bird bird = BirdFactory.createBird(data);
+			assertThat(bird.airSpeedVelocity()).isEqualTo(35);
 		}
 	}
 

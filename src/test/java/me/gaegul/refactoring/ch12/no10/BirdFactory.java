@@ -6,8 +6,6 @@ public class BirdFactory {
 
 	public static Bird createBird(Map<String, String> data) {
 		switch (data.get("type")) {
-			case "유럽 제비":
-				return new EuropeanSwallow(data);
 			case "아프리카 제비":
 				return new AfricanSwallow(data);
 			case "노르웨이 파랑 앵무":

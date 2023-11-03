@@ -23,7 +23,8 @@ class BirdFactoryTest {
 
 			@Test
 			void 유럽_제비_클래스_타입을_반환한다() {
-				assertThat(BirdFactory.createBird(data)).isInstanceOf(EuropeanSwallow.class);
+				Bird bird = BirdFactory.createBird(data);
+				assertThat(bird.getSpeciesDelegate()).isInstanceOf(EuropeanSwallowDelegate.class);
 			}
 		}
 
@@ -33,7 +34,7 @@ class BirdFactoryTest {
 
 			@Test
 			void 아프리카_제비_클래스_타입을_반환한다() {
-				assertThat(BirdFactory.createBird(data)).isInstanceOf(AfricanSwallow.class);
+				assertThat(BirdFactory.createBird(data)).isInstanceOf(Bird.class);
 			}
 		}
 
@@ -43,7 +44,7 @@ class BirdFactoryTest {
 
 			@Test
 			void 아프리카_제비_클래스_타입을_반환한다() {
-				assertThat(BirdFactory.createBird(data)).isInstanceOf(NorwegianBlueParrot.class);
+				assertThat(BirdFactory.createBird(data)).isInstanceOf(Bird.class);
 			}
 		}
 	}

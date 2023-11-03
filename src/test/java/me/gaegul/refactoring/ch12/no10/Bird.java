@@ -47,4 +47,8 @@ public class Bird {
 	boolean isEmptyPlumage() {
 		return this.plumage == null;
 	}
+
+	SpeciesDelegate getSpeciesDelegate() {
+		return this.speciesDelegate;
+	}
 }
