@@ -16,9 +16,9 @@ public class Bird {
 	private SpeciesDelegate selectSpeciesDelegate(Map<String, String> data) {
 		switch (data.get("type")) {
 			case "유럽 제비":
-				return new EuropeanSwallowDelegate();
+				return new EuropeanSwallowDelegate(data, this);
 			case "아프리카 제비":
-				return new AfricanSwallowDelegate(data);
+				return new AfricanSwallowDelegate(data, this);
 			case "노르웨이 파랑 앵무":
 				return new NorwegianBlueParrotDelegate(data, this);
 			default:
@@ -31,13 +31,7 @@ public class Bird {
 	}
 
 	public String plumage() {
-		if (this.speciesDelegate instanceof NorwegianBlueParrotDelegate) {
-			return ((NorwegianBlueParrotDelegate) this.speciesDelegate).plumage();
-		}
-		if (isEmptyPlumage()) {
-			return "보통이다";
-		}
-		return this.plumage;
+		return this.speciesDelegate.plumage();
 	}
 
 	/**

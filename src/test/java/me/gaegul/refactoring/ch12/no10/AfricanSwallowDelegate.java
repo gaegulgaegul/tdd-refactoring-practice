@@ -2,10 +2,11 @@ package me.gaegul.refactoring.ch12.no10;
 
 import java.util.Map;
 
-public class AfricanSwallowDelegate implements SpeciesDelegate {
+public class AfricanSwallowDelegate extends SpeciesDelegate {
     private int numberOfCocounts;
 
-    public AfricanSwallowDelegate(Map<String, String> data) {
+    public AfricanSwallowDelegate(Map<String, String> data, Bird bird) {
+        super(data, bird);
         this.numberOfCocounts = Integer.valueOf(data.getOrDefault("numberOfCocounts", "0")).intValue();
     }
 
