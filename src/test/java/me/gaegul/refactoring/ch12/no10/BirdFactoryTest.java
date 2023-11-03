@@ -43,7 +43,7 @@ class BirdFactoryTest {
 
 			@Test
 			void 노르웨이_파랑_앵무_클래스_타입을_반환한다() {
-				assertThat(BirdFactory.createBird(data)).isInstanceOf(NorwegianBlueParrot.class);
+				assertThat(BirdFactory.createBird(data).getSpeciesDelegate()).isInstanceOf(NorwegianBlueParrotDelegate.class);
 			}
 		}
 	}

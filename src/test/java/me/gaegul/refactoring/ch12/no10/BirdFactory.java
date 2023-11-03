@@ -5,11 +5,6 @@ import java.util.Map;
 public class BirdFactory {
 
 	public static Bird createBird(Map<String, String> data) {
-		switch (data.get("type")) {
-			case "노르웨이 파랑 앵무":
-				return new NorwegianBlueParrot(data);
-			default:
-				return new Bird(data);
-		}
+		return new Bird(data);
 	}
 }
